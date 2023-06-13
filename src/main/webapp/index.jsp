@@ -1,8 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.siit.studentRepoExample.JdbcStudentRepository" %>
-<%@ page import="com.siit.studentRepoExample.JpaStudentRepository" %>
-<%@ page import="com.siit.studentRepoExample.Student" %>
+<%@ page import="com.siit.studentRepoExample.repository.JpaStudentRepository" %>
+<%@ page import="com.siit.studentRepoExample.repository.CoursesRepository" %>
+<%@ page import="com.siit.studentRepoExample.OutOfNameIdeas" %>
+<%@ page import="com.siit.studentRepoExample.model.Student" %>
+<%@ page import="com.siit.studentRepoExample.model.Course" %>
 <html>
 
  <head>
@@ -15,12 +17,13 @@
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.css">
   </head>
 <body>
-    <h1>Student List from the index.jsp file</h1>
-    <table border="1" class="table table-dark w-25 p-3">
+    <h2>Student List from the index.jsp file</h2>
+    <table border="1" class="table table-striped table-hover w-50 p-3">
         <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
+            <th>Courses</th>
         </tr>
         <%
        //     JdbcStudentRepository repository = new JdbcStudentRepository();
@@ -32,25 +35,51 @@
                 <td><%= student.getId() %></td>
                 <td><%= student.getName() %></td>
                 <td><%= student.getEmail() %></td>
+                <td><%= student.getCoursesAsCsv() %></td>
             </tr>
         <% } %>
     </table>
 
 <br/>
 <br/>
-<h1>Add a student</h1>
+<h2>Add a student</h2>
 
     <form action="addStudent.jsp">
         <div class="form-outline mb-4">
             <input type="text" name="name" value="Name..." onclick="this.value=''"/><br/>
         </div>
         <div class="form-outline mb-4">
-            <input type="text" name="email"  value="Email ID..." onclick="this.value=''"/><br/>
+            <input type="text" name="email"  value="Email..." onclick="this.value=''"/><br/>
         </div>
 
     <br/>
     <input type="submit" value="Add student" class="btn btn-primary btn-block"/>
     </form>
+
+    <h2>Do some magic</h2>
+
+<form action="" method="POST">
+    <br/>
+    <input type="submit" name="generateName" value="Generate Name" class="btn btn-primary btn-block"/>
+</form>
+
+<%
+    if (request.getParameter("generateName") != null) {
+        OutOfNameIdeas nameIdeas = new OutOfNameIdeas();
+        Student generatedStudent = nameIdeas.getMeAName();
+        String generatedName = generatedStudent.getName();
+        String generatedEmail = generatedStudent.getEmail();
+%>
+
+<script>
+    window.onload = function() {
+        window.location.href = "addStudent.jsp?name=<%= generatedName %>&email=<%= generatedEmail %>";
+    };
+</script>
+
+<%
+    }
+%>
 
 </body>
 </html>

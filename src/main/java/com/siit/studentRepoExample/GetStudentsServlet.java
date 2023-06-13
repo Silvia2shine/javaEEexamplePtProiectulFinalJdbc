@@ -1,5 +1,6 @@
 package com.siit.studentRepoExample;
-import jakarta.servlet.ServletException;
+import com.siit.studentRepoExample.model.Student;
+import com.siit.studentRepoExample.repository.JdbcStudentRepository;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

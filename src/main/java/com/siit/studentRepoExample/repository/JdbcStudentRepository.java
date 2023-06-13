@@ -1,4 +1,6 @@
-package com.siit.studentRepoExample;
+package com.siit.studentRepoExample.repository;
+
+import com.siit.studentRepoExample.model.Student;
 
 import java.sql.*;
 import java.util.ArrayList;

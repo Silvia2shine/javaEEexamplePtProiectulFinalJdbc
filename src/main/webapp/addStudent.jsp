@@ -1,5 +1,6 @@
 
-<%@ page import="com.siit.studentRepoExample.Student, com.siit.studentRepoExample.JdbcStudentRepository" %>
+<%@ page import="com.siit.studentRepoExample.model.Student, com.siit.studentRepoExample.repository.JpaStudentRepository" %>
+<%@ page import="com.siit.studentRepoExample.model.Course" %>
 
 <%
   String name = request.getParameter("name");
@@ -7,7 +8,7 @@
 
   Student student = new Student(name, email);
 
-  JdbcStudentRepository studentRepo = new JdbcStudentRepository();
+  JpaStudentRepository studentRepo = new JpaStudentRepository();
 
   studentRepo.addStudent(student);
 

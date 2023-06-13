@@ -7,9 +7,12 @@
 
     <persistence-unit name="Eclipselink_JPA" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>com.siit.studentRepoExample.Student</class>
+        <class>com.siit.studentRepoExample.model.Student</class>
+        <class>com.siit.studentRepoExample.model.Course</class>
 
         <properties>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="javax.persistence.schema-generation.database.action" value="create"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/students"/>
             <property name="javax.persistence.jdbc.user" value="postgres"/>
             <property name="javax.persistence.jdbc.password" value="root"/>
