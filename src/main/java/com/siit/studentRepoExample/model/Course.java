@@ -1,6 +1,7 @@
 package com.siit.studentRepoExample.model;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,6 +19,8 @@ public class Course {
     private int id;
     private String name;
     private int duration;
-    @ManyToMany(mappedBy = "courses")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private List<Student> studentList;
 }
